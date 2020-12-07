@@ -22,6 +22,16 @@ pwd = "@dsInf123"
 driver = "{ODBC Driver 17 for SQL Server}"
 
 def connection():
+    '''
+    São as informações necessárias para realizara a conexão com o banco
+    de dados (pipe).
+
+    Returns
+    -------
+    conn : pipe
+        informações necessárias para se ligar com o banco de dados.
+
+    '''
     conn = pyodbc.connect(f"DRIVER={driver};\
                       SERVER={server};\
                       DATABASE={db};\
@@ -31,6 +41,25 @@ def connection():
     return conn
 
 def df_creator(table):
+    '''
+    Cria do dataframe de acordo com a tabela escolhida.
+
+    Parameters
+    ----------
+    table : string
+        Nome dado as tabelas.
+
+    Raises
+    ------
+    ValueError
+        O selecionado não está compreendido dentre os disponíveis.
+
+    Returns
+    -------
+    df : set
+        Dataframe lida.
+
+    '''
     if table not in tablenames:
         raise ValueError(f"Por favor, escolha uma das seguintes tabelas:\n {tablenames}")
     query = f"SELECT * FROM {table}"
